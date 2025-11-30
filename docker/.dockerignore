@@ -1,0 +1,51 @@
+# Node modules
+node_modules
+npm-debug.log*
+
+# Build outputs
+dist
+
+# Development files
+src
+*.ts
+tsconfig.json
+.gitignore
+.npmignore
+
+# Documentation
+README.md
+*.md
+
+# Test files
+test*
+*.test.js
+*.test.ts
+
+# IDE files
+.vscode
+.idea
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git
+.gitignore
+
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage
+
+# Downloads (will be created at runtime)
+downloads/*
+!downloads/.gitkeep
