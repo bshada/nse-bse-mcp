@@ -9,7 +9,7 @@ Get real-time Indian stock market data and let LLMs do the analysis for you.
 ## Quick Start
 
 ```bash
-npx nse-bse-mcp-server
+npx nse-bse-mcp
 ```
 
 Or run from source:
