@@ -1,6 +1,6 @@
 {
   "name": "nse-bse-mcp",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Model Context Protocol server for NSE and BSE India stock exchanges",
   "type": "module",
   "main": "dist/index.js",
