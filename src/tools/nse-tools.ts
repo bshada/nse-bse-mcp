@@ -182,16 +182,45 @@ export const nseTools: Tool[] = [
     },
   },
 
-  // Options & Derivatives Tools
+  // Options & Derivatives Tools (V3 API - Recommended)
+  {
+    name: 'nse_get_expiry_dates',
+    description:
+      'Get all available option expiry dates for a symbol. CALL THIS FIRST before using other option chain tools to get valid expiry dates. Returns dates sorted chronologically in DD-Mon-YYYY format (e.g., "12-Dec-2024", "19-Dec-2024"). Works for index options (NIFTY, BANKNIFTY, FINNIFTY, MIDCPNIFTY) and stock options (RELIANCE, TCS, etc.).',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        symbol: {
+          type: 'string',
+          description:
+            'Trading symbol. For indices use: NIFTY, BANKNIFTY, FINNIFTY, MIDCPNIFTY. For stocks use NSE symbol like RELIANCE, TCS, INFY, HDFCBANK.',
+        },
+      },
+      required: ['symbol'],
+    },
+  },
   {
     name: 'nse_option_chain',
-    description: 'Get complete option chain for a symbol. Use max_items and fields to limit large responses.',
+    description:
+      'Get complete option chain data for a symbol with all strikes and expiries. Returns full CE (Call) and PE (Put) data including lastPrice, openInterest, impliedVolatility, change, volume for each strike. Best for comprehensive analysis. For large symbols like NIFTY, use nse_filtered_option_chain instead to reduce data size. Expiry defaults to nearest if not specified.',
     inputSchema: {
       type: 'object',
       properties: addFilterProperties({
         symbol: {
           type: 'string',
-          description: 'Symbol (NIFTY, BANKNIFTY, FINNIFTY, or stock symbol)',
+          description:
+            'Trading symbol. Index options: NIFTY, BANKNIFTY, FINNIFTY, MIDCPNIFTY. Stock options: RELIANCE, TCS, INFY, etc.',
+        },
+        expiry: {
+          type: 'string',
+          description:
+            'Expiry date in DD-Mon-YYYY format (e.g., "12-Dec-2024"). Get valid dates from nse_get_expiry_dates. If omitted, uses nearest expiry.',
+        },
+        type: {
+          type: 'string',
+          description:
+            'Option type - "Indices" for index options (NIFTY, BANKNIFTY), "Equity" for stock options. Auto-detected based on symbol if not provided.',
+          enum: ['Indices', 'Equity'],
         },
       }),
       required: ['symbol'],
@@ -199,17 +228,25 @@ export const nseTools: Tool[] = [
   },
   {
     name: 'nse_filtered_option_chain',
-    description: 'Get filtered option chain with strike range. Use max_items and fields to limit large responses.',
+    description:
+      'Get a compact option chain with only essential data around ATM (At-The-Money) strikes. RECOMMENDED for LLM usage - reduces response size by ~90% while keeping key metrics: lastPrice, openInterest, changeinOpenInterest, impliedVolatility, totalTradedVolume for both CE and PE. Returns: symbol, underlyingValue, atmStrike, timestamp, and filtered strike data.',
     inputSchema: {
       type: 'object',
       properties: addFilterProperties({
         symbol: {
           type: 'string',
-          description: 'Symbol name',
+          description:
+            'Trading symbol. Index options: NIFTY, BANKNIFTY, FINNIFTY. Stock options: RELIANCE, TCS, INFY, etc.',
+        },
+        expiry: {
+          type: 'string',
+          description:
+            'Expiry date in DD-Mon-YYYY format (e.g., "12-Dec-2024"). Get valid dates from nse_get_expiry_dates. If omitted, uses nearest expiry.',
         },
         strike_range: {
           type: 'number',
-          description: 'Number of strikes above and below current price',
+          description:
+            'Number of strikes to include above and below ATM strike. Default: 10 (returns 21 strikes total). Use 5 for minimal data, 15-20 for wider analysis.',
         },
       }),
       required: ['symbol'],
@@ -217,38 +254,44 @@ export const nseTools: Tool[] = [
   },
   {
     name: 'nse_compile_option_chain',
-    description: 'Compile option chain for specific expiry date. Use max_items and fields to limit large responses.',
+    description:
+      'Get pre-calculated option chain analytics for a specific expiry. Returns comprehensive metrics: ATM strike, max pain level, Put-Call Ratio (PCR), max Call OI strike, max Put OI strike, total Call/Put OI, and full chain with per-strike PCR. Best for quick market sentiment analysis without manual calculations.',
     inputSchema: {
       type: 'object',
       properties: addFilterProperties({
         symbol: {
           type: 'string',
-          description: 'Symbol name',
+          description:
+            'Trading symbol. Index options: NIFTY, BANKNIFTY, FINNIFTY. Stock options: RELIANCE, TCS, INFY, etc.',
         },
-        expiry_date: {
+        expiry: {
           type: 'string',
-          description: 'Expiry date (YYYY-MM-DD)',
+          description:
+            'Expiry date in DD-Mon-YYYY format (e.g., "12-Dec-2024"). REQUIRED - get valid dates from nse_get_expiry_dates first.',
         },
       }),
-      required: ['symbol', 'expiry_date'],
+      required: ['symbol', 'expiry'],
     },
   },
   {
     name: 'nse_calculate_max_pain',
-    description: 'Calculate max pain for option chain',
+    description:
+      'Calculate the max pain strike price for options. Max pain is the strike price where option buyers would lose the most money (and option writers profit most) at expiry. Useful for predicting potential expiry settlement levels. Returns a single strike price number.',
     inputSchema: {
       type: 'object',
       properties: {
         symbol: {
           type: 'string',
-          description: 'Symbol name',
+          description:
+            'Trading symbol. Index options: NIFTY, BANKNIFTY, FINNIFTY. Stock options: RELIANCE, TCS, INFY, etc.',
         },
-        expiry_date: {
+        expiry: {
           type: 'string',
-          description: 'Expiry date (YYYY-MM-DD)',
+          description:
+            'Expiry date in DD-Mon-YYYY format (e.g., "12-Dec-2024"). REQUIRED - get valid dates from nse_get_expiry_dates first.',
         },
       },
-      required: ['symbol', 'expiry_date'],
+      required: ['symbol', 'expiry'],
     },
   },
   {

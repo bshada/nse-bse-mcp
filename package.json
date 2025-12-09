@@ -1,6 +1,6 @@
 {
   "name": "nse-bse-mcp",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Model Context Protocol server for NSE and BSE India stock exchanges",
   "type": "module",
   "main": "dist/index.js",
@@ -42,7 +42,7 @@
     "@modelcontextprotocol/sdk": "^1.0.4",
     "cors": "^2.8.5",
     "express": "^4.18.2",
-    "nse-bse-api": "^0.1.0",
+    "nse-bse-api": "^0.1.1",
     "pdf-parse": "^2.4.3"
   },
   "devDependencies": {

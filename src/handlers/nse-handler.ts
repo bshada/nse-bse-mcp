@@ -1,4 +1,4 @@
-import { NSEClient } from 'nse-bse-api';
+import { NSEClient, NSEApi } from 'nse-bse-api';
 import { formatLimitedResponse, LimitOptions } from '../utils/response-limiter.js';
 
 function parseDate(dateStr: string): Date {
@@ -89,25 +89,37 @@ export async function handleNseTool(
         });
         break;
 
-      // Options & Derivatives
+      // Options & Derivatives (V3 API)
+      case 'nse_get_expiry_dates':
+        result = await nse.getExpiryDatesV3(args.symbol);
+        break;
+
       case 'nse_option_chain':
-        result = await nse.optionChain(args.symbol);
+        result = await nse.optionChainV3({
+          symbol: args.symbol,
+          expiry: args.expiry,
+          type: args.type,
+        });
         break;
 
       case 'nse_filtered_option_chain':
-        result = await nse.filteredOptionChain(args.symbol, args.strike_range);
-        break;
-
-      case 'nse_compile_option_chain':
-        result = await nse.compileOptionChain(
+        result = await nse.filteredOptionChainV3(
           args.symbol,
-          parseDate(args.expiry_date)
+          args.expiry,
+          args.strike_range
         );
         break;
 
+      case 'nse_compile_option_chain':
+        result = await nse.compileOptionChainV3(args.symbol, args.expiry);
+        break;
+
       case 'nse_calculate_max_pain': {
-        const optionChain = await nse.optionChain(args.symbol);
-        result = NSEClient.maxpain(optionChain, parseDate(args.expiry_date));
+        const optionChainV3 = await nse.optionChainV3({
+          symbol: args.symbol,
+          expiry: args.expiry,
+        });
+        result = NSEApi.OptionsApi.calculateMaxPainV3(optionChainV3, args.expiry);
         break;
       }
 

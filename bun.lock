@@ -8,7 +8,7 @@
         "@modelcontextprotocol/sdk": "^1.0.4",
         "cors": "^2.8.5",
         "express": "^4.18.2",
-        "nse-bse-api": "^0.1.0",
+        "nse-bse-api": "^0.1.1",
         "pdf-parse": "^2.4.3",
       },
       "devDependencies": {
@@ -315,7 +315,7 @@
 
     "normalize-url": ["normalize-url@8.1.0", "", {}, "sha512-X06Mfd/5aKsRHc0O0J5CUedwnPmnDtLF2+nq+KN9KSDlJHkPuh0JUviWjEWMe0SW/9TDdSLVPuk7L5gGTIA1/w=="],
 
-    "nse-bse-api": ["nse-bse-api@0.1.0", "", { "dependencies": { "adm-zip": "^0.5.16", "axios": "^1.7.7", "axios-cookiejar-support": "^6.0.2", "got": "^12.6.1", "node-html-parser": "^6.1.10", "tough-cookie": "^4.1.3" } }, "sha512-IaHywVRj415k6FisoZMDg4amOkgNn7h77HJtT9FJUeWVJpCOmuG286lFaRz9h5Tx14Sj1dqVv0ibCO8dOxijpw=="],
+    "nse-bse-api": ["nse-bse-api@0.1.1", "", { "dependencies": { "adm-zip": "^0.5.16", "axios": "^1.7.7", "axios-cookiejar-support": "^6.0.2", "got": "^12.6.1", "node-html-parser": "^6.1.10", "tough-cookie": "^4.1.3" } }, "sha512-FZo//Z0hYhLGChgnyv/UDGo1Z+CDbM7V+aZt/Sr+s1EPylNAevD+gISwIyyga2ydIc4f7cmfzHkUVv9F60jbvg=="],
 
     "nth-check": ["nth-check@2.1.1", "", { "dependencies": { "boolbase": "^1.0.0" } }, "sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w=="],
 

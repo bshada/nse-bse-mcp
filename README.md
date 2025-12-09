@@ -45,7 +45,7 @@ Server will be available at `http://localhost:3000/mcp`
 
 ## Features
 
-- **66 Tools** (44 NSE + 20 BSE + 2 Document)
+- **61 Tools** (39 NSE + 20 BSE + 2 Document)
 - **Smart Response Limiting** - Returns metadata for large responses, letting LLM decide what to fetch
 - **Document Downloader** - Download and extract IPO prospectus, reports, circulars
 - **Streamable HTTP** transport (stateless)
@@ -53,9 +53,9 @@ Server will be available at `http://localhost:3000/mcp`
 - **Health check** endpoint
 - **Production ready**
 
-## Tools (66 Total)
+## Tools (61 Total)
 
-### NSE Tools (44)
+### NSE Tools (39)
 
 #### Market Data (6 tools)
 - `nse_get_market_status` - Current market status and trading hours
@@ -71,11 +71,12 @@ Server will be available at `http://localhost:3000/mcp`
 - `nse_fno_historical` - Historical F&O data
 - `nse_vix_historical` - Historical VIX (volatility index) data
 
-#### Options & Derivatives (6 tools)
-- `nse_option_chain` - Complete option chain for symbols
-- `nse_filtered_option_chain` - Option chain with strike range filtering
-- `nse_compile_option_chain` - Option chain for specific expiry date
-- `nse_calculate_max_pain` - Max pain calculation for options
+#### Options & Derivatives (7 tools)
+- `nse_get_expiry_dates` - Get available expiry dates for a symbol (call first!)
+- `nse_option_chain` - Complete option chain with all strikes (V3 API)
+- `nse_filtered_option_chain` - Compact option chain around ATM strikes (~90% smaller)
+- `nse_compile_option_chain` - Pre-calculated analytics (ATM, max pain, PCR, OI)
+- `nse_calculate_max_pain` - Max pain strike price calculation
 - `nse_fno_lots` - F&O lot sizes for all symbols
 - `nse_futures_expiry` - Futures expiry dates
 
