@@ -112,28 +112,7 @@ export const nseTools: Tool[] = [
       required: ['symbol', 'from_date', 'to_date'],
     },
   },
-  {
-    name: 'nse_index_historical',
-    description: 'Fetch historical index data. Use max_items and fields to limit large responses.',
-    inputSchema: {
-      type: 'object',
-      properties: addFilterProperties({
-        index: {
-          type: 'string',
-          description: 'Index name (e.g., NIFTY 50, NIFTY BANK)',
-        },
-        from_date: {
-          type: 'string',
-          description: 'Start date (YYYY-MM-DD)',
-        },
-        to_date: {
-          type: 'string',
-          description: 'End date (YYYY-MM-DD)',
-        },
-      }),
-      required: ['index', 'from_date', 'to_date'],
-    },
-  },
+
   {
     name: 'nse_fno_historical',
     description: 'Fetch historical F&O data. Use max_items and fields to limit large responses.',

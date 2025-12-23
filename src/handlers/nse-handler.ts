@@ -64,14 +64,6 @@ export async function handleNseTool(
         });
         break;
 
-      case 'nse_index_historical':
-        result = await nse.fetch_historical_index_data({
-          index: args.index,
-          from_date: parseDate(args.from_date),
-          to_date: parseDate(args.to_date),
-        });
-        break;
-
       case 'nse_fno_historical':
         result = await nse.fetch_historical_fno_data({
           symbol: args.symbol,

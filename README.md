@@ -45,7 +45,7 @@ Server will be available at `http://localhost:3000/mcp`
 
 ## Features
 
-- **61 Tools** (39 NSE + 20 BSE + 2 Document)
+- **60 Tools** (38 NSE + 20 BSE + 2 Document)
 - **Smart Response Limiting** - Returns metadata for large responses, letting LLM decide what to fetch
 - **Document Downloader** - Download and extract IPO prospectus, reports, circulars
 - **Streamable HTTP** transport (stateless)
@@ -53,9 +53,9 @@ Server will be available at `http://localhost:3000/mcp`
 - **Health check** endpoint
 - **Production ready**
 
-## Tools (61 Total)
+## Tools (60 Total)
 
-### NSE Tools (39)
+### NSE Tools (38)
 
 #### Market Data (6 tools)
 - `nse_get_market_status` - Current market status and trading hours
@@ -65,9 +65,8 @@ Server will be available at `http://localhost:3000/mcp`
 - `nse_get_gainers` - Top gainers from market data
 - `nse_get_losers` - Top losers from market data
 
-#### Historical Data (4 tools)
+#### Historical Data (3 tools)
 - `nse_equity_historical` - Historical equity data with date range
-- `nse_index_historical` - Historical index data
 - `nse_fno_historical` - Historical F&O data
 - `nse_vix_historical` - Historical VIX (volatility index) data
 
